@@ -45,6 +45,11 @@ set_target_properties(avcodec
         PROPERTIES
         IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/src/main/jniLibs/armeabi-v7a/libavcodec-57.so)
 
+add_library(avdevice SHARED IMPORTED)
+set_target_properties(avdevice
+        PROPERTIES
+        IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/src/main/jniLibs/armeabi-v7a/libavdevice-57.so)
+
 add_library(avfilter SHARED IMPORTED)
 set_target_properties(avfilter
         PROPERTIES
@@ -81,7 +86,9 @@ target_link_libraries( # Specifies the target library.
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib}
+        -landroid
         avcodec
+        avdevice
         avfilter
         avformat
         avutil
