@@ -5,13 +5,14 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.view.WindowManager
 import cc.gl.com.ffmpegcode.constant.ExtraKey
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
-    val input = File(Environment.getExternalStorageDirectory(), "input.mp4").absolutePath!!
+    val input = File(Environment.getExternalStorageDirectory(), "a.mp4").absolutePath!!
 
     companion object {
         // Used to load the 'native-lib' library on application startup.
@@ -31,8 +32,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
+
+        val filePath = intent.getStringExtra(ExtraKey.EXTRA_FILE_PATH)
         // Example of a call to a native method
-        sample_text.text = getInfo()
+        play.player(input)
     }
 
     /**

@@ -32,14 +32,14 @@ class VideoView: SurfaceView {
 
     companion object {
         init {
-            System.loadLibrary("avcodec")
-            System.loadLibrary("avdevice")
-            System.loadLibrary("avfilter")
-            System.loadLibrary("avformat")
-            System.loadLibrary("avutil")
-            System.loadLibrary("swresample")
-            System.loadLibrary("swscale")
             System.loadLibrary("native-lib")
+            System.loadLibrary("avcodec-57")
+            System.loadLibrary("avdevice-57")
+            System.loadLibrary("avfilter-6")
+            System.loadLibrary("avformat-57")
+            System.loadLibrary("avutil-55")
+            System.loadLibrary("swresample-2")
+            System.loadLibrary("swscale-4")
         }
     }
 }

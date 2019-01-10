@@ -66,7 +66,7 @@ Java_cc_gl_com_ffmpegcode_MainActivity_getInfo(JNIEnv *env, jobject) {
 
 #define LOGE(FORMAT, ...) __android_log_print(ANDROID_LOG_ERROR,"LC",FORMAT,##__VA_ARGS__);
 extern "C" JNIEXPORT void JNICALL
-Java_com_jinhe_ffmpegdemo_VideoView_render(JNIEnv *env,
+Java_cc_gl_com_ffmpegcode_VideoView_render(JNIEnv *env,
                                            jobject obj,
                                            jstring inputStr_,
                                            jobject surface) {
@@ -123,7 +123,6 @@ Java_com_jinhe_ffmpegdemo_VideoView_render(JNIEnv *env,
     //输出文件
     //FILE *fp = fopen(outputPath,"wb");
 
-
     //缓存区
     uint8_t  *out_buffer= (uint8_t *)av_malloc(avpicture_get_size(AV_PIX_FMT_RGBA,
                                                                   avCodecContext->width,avCodecContext->height));
@@ -149,16 +148,16 @@ Java_com_jinhe_ffmpegdemo_VideoView_render(JNIEnv *env,
 
     LOGE("解码 ")
     while (av_read_frame(avFormatContext, packet) >= 0) {
-        LOGE("解码 %d",packet->stream_index)
-        LOGE("VINDEX %d",video_index)
+        //LOGE("解码 %d",packet->stream_index)
+        //LOGE("VINDEX %d",video_index)
         if(packet->stream_index==video_index){
-            LOGE("解码 hhhhh")
+            //LOGE("解码 hhhhh")
             //如果是视频流
             //解码
             avcodec_decode_video2(avCodecContext, frame, &frameCount, packet);
-            LOGE("解码中....  %d",frameCount)
+            //LOGE("解码中....  %d",frameCount)
             if (frameCount) {
-                LOGE("转换并绘制")
+                //LOGE("转换并绘制")
                 //说明有内容
                 //绘制之前配置nativewindow
                 ANativeWindow_setBuffersGeometry(nativeWindow,avCodecContext->width,avCodecContext->height,WINDOW_FORMAT_RGBA_8888);
@@ -172,7 +171,7 @@ Java_com_jinhe_ffmpegdemo_VideoView_render(JNIEnv *env,
                 uint8_t *dst= (uint8_t *) native_outBuffer.bits;
 
                 //拿到一行有多少个字节 RGBA
-                int destStride=native_outBuffer.stride*4;
+                int destStride=native_outBuffer.stride * 4;
 
                 //像素数据的首地址
                 uint8_t * src=  rgb_frame->data[0];
@@ -189,8 +188,7 @@ Java_com_jinhe_ffmpegdemo_VideoView_render(JNIEnv *env,
 
                 //解锁
                 ANativeWindow_unlockAndPost(nativeWindow);
-                usleep(1000 * 16);
-
+                //usleep(1000 * 16);
             }
         }
         av_free_packet(packet);
