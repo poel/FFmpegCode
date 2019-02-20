@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         const val TAG = "CallActivity"
-        fun start(context: Context, filePath: String) {
+        fun start(context: Context, filePath: String?) {
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra(ExtraKey.EXTRA_FILE_PATH, filePath)
             context.startActivity(intent)
@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
             WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED)
 
-        val filePath = intent.getStringExtra(ExtraKey.EXTRA_FILE_PATH)
         // Example of a call to a native method
         play.player(input)
     }

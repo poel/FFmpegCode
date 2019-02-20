@@ -11,7 +11,6 @@ class VideoView: SurfaceView {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         init()
-
     }
 
     private fun init() {

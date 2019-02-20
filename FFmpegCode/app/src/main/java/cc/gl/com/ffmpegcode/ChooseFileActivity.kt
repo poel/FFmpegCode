@@ -9,7 +9,6 @@ import com.blankj.utilcode.util.PermissionUtils
 import android.app.Activity
 import android.net.Uri
 
-
 class ChooseFileActivity : AppCompatActivity() {
 
     companion object {
@@ -87,8 +86,10 @@ class ChooseFileActivity : AppCompatActivity() {
             // Pull that URI using resultData.getData().
             var uri: Uri? = null
             if (resultData != null) {
+
                 uri = resultData.data
-                MainActivity.start(this@ChooseFileActivity, uri.path)
+                val path = uri.toString()
+                MainActivity.start(this@ChooseFileActivity, path)
             }
         }
     }
